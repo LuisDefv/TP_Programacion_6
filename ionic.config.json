@@ -1,0 +1,7 @@
+{
+  "name": "radar-vuelos",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
