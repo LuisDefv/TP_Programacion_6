@@ -243,7 +243,7 @@ export class Tab1Page implements AfterViewInit, OnDestroy {
 
   private startTimer(): void {
     this.stopTimer();
-    this.timer = setInterval(() => void this.refresh(), 5000);
+    this.timer = setInterval(() => void this.refresh(), 10000);
   }
 
   private stopTimer(): void {
