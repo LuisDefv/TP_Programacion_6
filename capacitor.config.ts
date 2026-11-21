@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.radardevuelos',
-  appName: 'radar-vuelos',
+  appName: 'Radar Vuelos',
   webDir: 'www',
   plugins: {
     CapacitorHttp: {
