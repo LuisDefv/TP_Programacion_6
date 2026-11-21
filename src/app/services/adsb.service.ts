@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Capacitor, CapacitorHttp } from '@capacitor/core';
 
-import { AircraftInfo, Flight, FlightRoute } from './flight.model';
-import { distanceKm } from './geo';
+import { AircraftInfo, Flight, FlightRoute } from '../models/flight.model';
+import { distanceKm } from '../utils/geo';
 
 interface RawAircraft {
   hex?: string;

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { TabsPageRoutingModule } from './tabs-routing.module';
 
-import { FlightDetailModule } from '../flight-detail/flight-detail.module';
+import { FlightDetailModule } from '../pages/flight-detail/flight-detail.module';
 import { TabsPage } from './tabs.page';
 
 @NgModule({

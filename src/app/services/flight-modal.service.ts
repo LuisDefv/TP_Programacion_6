@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular/lazy';
 
-import { FlightDetailPage } from '../flight-detail/flight-detail.page';
-import { Flight } from './flight.model';
+import { FlightDetailPage } from '../pages/flight-detail/flight-detail.page';
+import { Flight } from '../models/flight.model';
 
 @Injectable({ providedIn: 'root' })
 export class FlightModalService {

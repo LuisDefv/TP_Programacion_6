@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, map, Observable, startWith, Subject } from 'rxjs';
 
-import { FlightModalService } from '../core/flight-modal.service';
-import { Flight } from '../core/flight.model';
-import { FlightsService } from '../core/flights.service';
-import { formatAltitude, formatDistance } from '../core/geo';
+import { FlightModalService } from '../../services/flight-modal.service';
+import { Flight } from '../../models/flight.model';
+import { FlightsService } from '../../services/flights.service';
+import { formatAltitude, formatDistance } from '../../utils/geo';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+  selector: 'app-vuelos',
+  templateUrl: 'vuelos.page.html',
+  styleUrls: ['vuelos.page.scss'],
   standalone: false,
 })
-export class Tab2Page implements OnInit {
+export class VuelosPage implements OnInit {
   readonly formatDistance = formatDistance;
   readonly formatAltitude = formatAltitude;
   readonly status$ = this.flights.status$;

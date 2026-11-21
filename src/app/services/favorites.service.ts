@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Flight, SavedFlight } from './flight.model';
+import { Flight, SavedFlight } from '../models/flight.model';
 
 const FAVORITES_KEY = 'radar:favorites';
 

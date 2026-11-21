@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 
-import { FavoritesService } from '../core/favorites.service';
-import { FlightModalService } from '../core/flight-modal.service';
-import { Flight, SavedFlight } from '../core/flight.model';
+import { FavoritesService } from '../../services/favorites.service';
+import { FlightModalService } from '../../services/flight-modal.service';
+import { Flight, SavedFlight } from '../../models/flight.model';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss'],
+  selector: 'app-favoritos',
+  templateUrl: 'favoritos.page.html',
+  styleUrls: ['favoritos.page.scss'],
   standalone: false,
 })
-export class Tab3Page {
+export class FavoritosPage {
   readonly favorites$ = this.favorites.favorites$;
 
   constructor(

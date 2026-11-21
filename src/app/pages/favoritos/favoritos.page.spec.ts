@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 
-import { Tab2PageModule } from './tab2.module';
-import { Tab2Page } from './tab2.page';
+import { FavoritosPageModule } from './favoritos.module';
+import { FavoritosPage } from './favoritos.page';
 
-describe('Tab2Page', () => {
-  let component: Tab2Page;
-  let fixture: ComponentFixture<Tab2Page>;
+describe('FavoritosPage', () => {
+  let component: FavoritosPage;
+  let fixture: ComponentFixture<FavoritosPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Tab2PageModule, RouterModule.forRoot([])]
+      imports: [FavoritosPageModule, RouterModule.forRoot([])]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Tab2Page);
+    fixture = TestBed.createComponent(FavoritosPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

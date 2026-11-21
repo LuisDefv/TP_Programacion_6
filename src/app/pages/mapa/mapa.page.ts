@@ -2,19 +2,19 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
 import { Subscription } from 'rxjs';
 
-import { AdsbService } from '../core/adsb.service';
-import { FlightModalService } from '../core/flight-modal.service';
-import { Flight, FlightRoute } from '../core/flight.model';
-import { FlightsService } from '../core/flights.service';
-import { LocationService } from '../core/location.service';
+import { AdsbService } from '../../services/adsb.service';
+import { FlightModalService } from '../../services/flight-modal.service';
+import { Flight, FlightRoute } from '../../models/flight.model';
+import { FlightsService } from '../../services/flights.service';
+import { LocationService } from '../../services/location.service';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
+  selector: 'app-mapa',
+  templateUrl: 'mapa.page.html',
+  styleUrls: ['mapa.page.scss'],
   standalone: false,
 })
-export class Tab1Page implements AfterViewInit, OnDestroy {
+export class MapaPage implements AfterViewInit, OnDestroy {
   readonly flights$ = this.flights.flights$;
   readonly status$ = this.flights.status$;
   refreshing = false;

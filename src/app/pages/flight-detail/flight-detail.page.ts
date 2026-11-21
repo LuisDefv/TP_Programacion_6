@@ -2,16 +2,16 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { ModalController } from '@ionic/angular/lazy';
 
-import { AdsbService } from '../core/adsb.service';
-import { FavoritesService } from '../core/favorites.service';
-import { AircraftInfo, Flight, FlightRoute } from '../core/flight.model';
+import { AdsbService } from '../../services/adsb.service';
+import { FavoritesService } from '../../services/favorites.service';
+import { AircraftInfo, Flight, FlightRoute } from '../../models/flight.model';
 import {
   formatAltitude,
   formatDistance,
   formatSpeed,
   formatTrack,
   formatVerticalRate,
-} from '../core/geo';
+} from '../../utils/geo';
 
 @Component({
   selector: 'app-flight-detail',

@@ -3,7 +3,7 @@ import { Preferences } from '@capacitor/preferences';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { AdsbService } from './adsb.service';
-import { Flight } from './flight.model';
+import { Flight } from '../models/flight.model';
 
 export interface FlightsStatus {
   loading: boolean;
