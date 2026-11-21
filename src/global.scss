@@ -57,6 +57,23 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
+/* Color del avion segun la altitud */
+.plane-marker--ground .plane {
+  background: #6e7781;
+}
+
+.plane-marker--low .plane {
+  background: #2da44e;
+}
+
+.plane-marker--mid .plane {
+  background: #1f6feb;
+}
+
+.plane-marker--high .plane {
+  background: #8250df;
+}
+
 .plane-marker .plane svg {
   width: 15px;
   height: 15px;

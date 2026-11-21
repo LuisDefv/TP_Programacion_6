@@ -24,6 +24,7 @@ export class Tab1Page implements AfterViewInit, OnDestroy {
   private readonly routeLayer = L.layerGroup();
   private readonly markers = new Map<string, L.Marker>();
   private readonly markerTracks = new Map<string, number>();
+  private readonly markerBands = new Map<string, string>();
   private readonly routeCache = new Map<string, FlightRoute | null>();
   private subscription?: Subscription;
   private timer?: ReturnType<typeof setInterval>;
@@ -102,9 +103,11 @@ export class Tab1Page implements AfterViewInit, OnDestroy {
       if (marker) {
         marker.setLatLng([flight.lat, flight.lon]);
         const track = flight.track ?? 0;
-        if (Math.abs((this.markerTracks.get(key) ?? 0) - track) > 2) {
+        const band = this.altitudeBand(flight.altitudeFt);
+        if (Math.abs((this.markerTracks.get(key) ?? 0) - track) > 2 || this.markerBands.get(key) !== band) {
           marker.setIcon(this.iconFor(flight));
           this.markerTracks.set(key, track);
+          this.markerBands.set(key, band);
         }
       } else {
         const created = L.marker([flight.lat, flight.lon], {
@@ -115,6 +118,7 @@ export class Tab1Page implements AfterViewInit, OnDestroy {
           .addTo(this.aircraftLayer);
         this.markers.set(key, created);
         this.markerTracks.set(key, flight.track ?? 0);
+        this.markerBands.set(key, this.altitudeBand(flight.altitudeFt));
       }
     }
 
@@ -123,6 +127,7 @@ export class Tab1Page implements AfterViewInit, OnDestroy {
         marker.remove();
         this.markers.delete(key);
         this.markerTracks.delete(key);
+        this.markerBands.delete(key);
       }
     }
   }
@@ -137,11 +142,24 @@ export class Tab1Page implements AfterViewInit, OnDestroy {
   private iconFor(flight: Flight): L.DivIcon {
     const rotation = flight.track ?? 0;
     return L.divIcon({
-      className: 'plane-marker',
+      className: `plane-marker plane-marker--${this.altitudeBand(flight.altitudeFt)}`,
       html: `<div class="plane" style="transform: rotate(${rotation}deg)"><svg viewBox="0 0 24 24"><path d="M12 2 19 21 12 17 5 21z"/></svg></div>`,
       iconSize: [28, 28],
       iconAnchor: [14, 14],
     });
+  }
+
+  private altitudeBand(feet: number | null): string {
+    if (feet === null || feet < 1000) {
+      return 'ground';
+    }
+    if (feet < 10000) {
+      return 'low';
+    }
+    if (feet < 25000) {
+      return 'mid';
+    }
+    return 'high';
   }
 
   private async select(flight: Flight): Promise<void> {
