@@ -1,12 +1,11 @@
 # Radar Vuelos
 
-App móvil que muestra en un mapa los aviones que están volando en tiempo real.
-Cada avión se puede tocar para ver su aerolínea, ruta, tipo de aeronave, altitud
-y velocidad. También permite buscarlos, guardarlos en favoritos y avisar cuando
-uno pasa cerca de tu ubicación.
+App móvil que muestra en un mapa los aviones que están volando cerca, en tiempo
+real. Cada avión se puede tocar para ver su aerolínea, ruta, tipo de aeronave,
+altitud y velocidad. También se pueden buscar y guardar en favoritos.
 
 Hecha con **Ionic + Angular** y empaquetada con **Capacitor**. Los datos salen de
-**adsb.lol** (posiciones en vivo) y **adsbdb** (rutas y aerolíneas). Las requests
+**adsb.fi** (posiciones en vivo) y **adsbdb** (rutas y aerolíneas). Las requests
 se hacen con **CapacitorHttp**, así que no necesita backend ni sufre problemas de
 CORS en el celular. El mapa usa **Leaflet** con tiles de OpenStreetMap.
 
@@ -17,15 +16,15 @@ CORS en el celular. El mapa usa **Leaflet** con tiles de OpenStreetMap.
   matrícula o código hex.
 - Detalle del vuelo con aerolínea, ruta (origen → destino) y tipo de avión.
 - Favoritos guardados en el dispositivo.
-- Aviso de "qué me sobrevuela" según tu ubicación.
-- Modo oscuro y soporte offline con el último estado conocido.
+- Último listado guardado, para abrir la app aunque no haya conexión.
+- Modo claro/oscuro según el sistema.
 
 ## Stack
 
-- Ionic 8 + Angular
-- Capacitor 7 (`CapacitorHttp`, `Preferences`, `Geolocation`, `Haptics`)
+- Ionic 9 + Angular 22
+- Capacitor 8 (`CapacitorHttp`, `Preferences`, `Geolocation`, `Haptics`)
 - Leaflet + OpenStreetMap
-- adsb.lol (datos en vivo) + adsbdb (rutas y aerolíneas)
+- adsb.fi (datos en vivo) + adsbdb (rutas y aerolíneas)
 
 ## Requisitos
 
@@ -33,30 +32,38 @@ CORS en el celular. El mapa usa **Leaflet** con tiles de OpenStreetMap.
 - Ionic CLI (`npm install -g @ionic/cli`)
 - Android Studio + JDK 21 (para compilar el APK)
 
-## Cómo generar el proyecto
+## Correr en el navegador
 
 ```bash
-ionic start radar-vuelos tabs --type=angular --capacitor
-cd radar-vuelos
-npm i @capacitor/preferences @capacitor/geolocation @capacitor/haptics
-npm i leaflet @types/leaflet
-Habilitar CapacitorHttp en capacitor.config.ts:
-plugins: {
-  CapacitorHttp: { enabled: true }
-}
-Correr en el navegador
+npm install
 ionic serve
-Compilar el APK
+```
+
+En modo web las requests pasan por el proxy de desarrollo (`proxy.conf.json`),
+porque adsb.fi no manda cabeceras CORS.
+
+## Compilar el APK
+
+```bash
 ionic build
-npx cap add android
 npx cap sync android
 cd android
 ./gradlew assembleDebug
-El APK queda en:
-android/app/build/outputs/apk/debug/app-debug.apk
-Instalarlo en el celular conectado por USB:
+```
+
+El APK queda en `android/app/build/outputs/apk/debug/app-debug.apk`.
+
+Para instalarlo en un celular conectado por USB:
+
+```bash
 adb install -r app-debug.apk
-Atribuciones
-- Datos ADS-B: adsb.lol (https://adsb.lol) (ODbL 1.0)
-- Rutas y aerolíneas: adsbdb (https://www.adsbdb.com)
-- Mapa: OpenStreetMap (https://www.openstreetmap.org)
+```
+
+La app pide permiso de ubicación para centrar el mapa. Si se rechaza, arranca en
+Asunción.
+
+## Atribuciones
+
+- Datos ADS-B: [adsb.fi](https://adsb.fi) (ODbL 1.0)
+- Rutas y aerolíneas: [adsbdb](https://www.adsbdb.com)
+- Mapa: [OpenStreetMap](https://www.openstreetmap.org)
