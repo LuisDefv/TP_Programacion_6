@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Capacitor, CapacitorHttp } from '@capacitor/core';
 
+import { environment } from '../../environments/environment';
 import { AircraftInfo, Flight, FlightRoute } from '../models/flight.model';
 import { distanceKm } from '../utils/geo';
 
@@ -24,9 +25,10 @@ interface PointResponse {
 @Injectable({ providedIn: 'root' })
 export class AdsbService {
   private readonly isWeb = Capacitor.getPlatform() === 'web';
-  private readonly liveBase = this.isWeb ? '/adsbfi/api/v3' : 'https://opendata.adsb.fi/api/v3';
-  private readonly fallbackBase = this.isWeb ? '/adsb/v2' : 'https://api.adsb.lol/v2';
-  private readonly infoUrl = this.isWeb ? '/adsbdb/v0' : 'https://api.adsbdb.com/v0';
+  private readonly urls = this.isWeb ? environment.proxy : environment.api;
+  private readonly liveBase = this.urls.adsbfi;
+  private readonly fallbackBase = this.urls.adsbLol;
+  private readonly infoUrl = this.urls.adsbdb;
   private readonly routes = new Map<string, Promise<FlightRoute | null>>();
 
   async nearby(lat: number, lon: number, radiusNm = 250): Promise<Flight[]> {
