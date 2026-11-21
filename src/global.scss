@@ -152,3 +152,7 @@
     color: #8ab4f8;
   }
 }
+
+.leaflet-top.leaflet-right {
+  top: var(--ion-safe-area-top, 0px);
+}

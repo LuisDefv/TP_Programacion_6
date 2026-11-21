@@ -48,7 +48,7 @@ export class MapaPage implements OnInit, AfterViewInit, OnDestroy {
     this.flights.setCenter(center.lat, center.lon);
 
     this.map = L.map('map', { zoomControl: false }).setView([center.lat, center.lon], 7);
-    L.control.zoom({ position: 'bottomright' }).addTo(this.map);
+    L.control.zoom({ position: 'topright' }).addTo(this.map);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '&copy; OpenStreetMap',
