@@ -1,17 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="map-content">
+  <div id="map"></div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="map-status" *ngIf="status$ | async as status">
+    <span
+      class="dot"
+      [class.dot--error]="status.error"
+      [class.dot--cached]="status.cached"
+    ></span>
+    <span>{{ (flights$ | async)?.length ?? 0 }} vuelos</span>
+    <span *ngIf="status.loading && !status.updatedAt">actualizando</span>
+    <span *ngIf="status.updatedAt">· {{ status.updatedAt | date: 'HH:mm:ss' }}</span>
+    <span *ngIf="status.cached">· sin conexión</span>
+  </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="map-empty" *ngIf="!(flights$ | async)?.length && !(status$ | async)?.error">
+    Sin vuelos en esta zona. Mové el mapa.
+  </div>
+
+  <div class="map-error" *ngIf="(status$ | async)?.error">
+    <ion-icon name="cloud-offline-outline"></ion-icon>
+    <span>{{ (status$ | async)?.error }} Reintentando…</span>
+  </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button size="small" (click)="refresh(true)" [disabled]="refreshing">
+      <ion-icon name="refresh"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
