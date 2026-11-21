@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="favorites$ | async as favorites">
+    <ion-list *ngIf="favorites.length > 0">
+      <ion-item-sliding *ngFor="let favorite of favorites">
+        <ion-item button (click)="open(favorite)">
+          <ion-icon slot="start" name="airplane-outline" color="primary"></ion-icon>
+          <ion-label>
+            <h2>{{ favorite.callsign || favorite.hex }}</h2>
+            <p>
+              {{ favorite.type || 'Tipo desconocido' }} ·
+              {{ favorite.registration || 'sin matrícula' }}
+            </p>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="remove(favorite.hex)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <div class="empty-state" *ngIf="favorites.length === 0">
+      <ion-icon name="heart-outline"></ion-icon>
+      <p>Todavía no guardaste vuelos.</p>
+      <span>Abrí un vuelo y tocá el corazón para tenerlo acá.</span>
+    </div>
+  </ng-container>
+</ion-content>

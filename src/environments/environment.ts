@@ -1,16 +1,15 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
-  production: false
+  production: false,
+  api: {
+    // Posiciones en vivo (principal y respaldo) y datos de rutas/aeronaves.
+    adsbfi: 'https://opendata.adsb.fi/api/v3',
+    adsbLol: 'https://api.adsb.lol/v2',
+    adsbdb: 'https://api.adsbdb.com/v0',
+  },
+  // En el navegador se usa el proxy de desarrollo (proxy.conf.json) por CORS.
+  proxy: {
+    adsbfi: '/adsbfi/api/v3',
+    adsbLol: '/adsb/v2',
+    adsbdb: '/adsbdb/v0',
+  },
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

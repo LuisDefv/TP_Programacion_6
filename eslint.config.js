@@ -10,6 +10,8 @@ module.exports = tseslint.config(
     processor: angular.processInlineTemplates,
     rules: {
       "@angular-eslint/prefer-standalone": "off",
+      // La consigna pide inyectar los servicios por constructor.
+      "@angular-eslint/prefer-inject": "off",
       "@angular-eslint/component-class-suffix": [
         "error",
         { suffixes: ["Page", "Component"] },
@@ -27,6 +29,9 @@ module.exports = tseslint.config(
   {
     files: ["**/*.html"],
     extends: [...angular.configs.templateRecommended],
-    rules: {},
+    rules: {
+      // Se usan *ngIf / *ngFor como en clase.
+      "@angular-eslint/template/prefer-control-flow": "off",
+    },
   }
 );

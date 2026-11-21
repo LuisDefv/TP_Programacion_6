@@ -35,3 +35,124 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+.plane-marker {
+  background: transparent;
+  border: 0;
+}
+
+.plane-marker:not(.leaflet-zoom-animated) {
+  transition: transform 1s linear;
+}
+
+.plane-marker .plane {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
+  background: #1f6feb;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* Color del avion segun la altitud */
+.plane-marker--ground .plane {
+  background: #6e7781;
+}
+
+.plane-marker--low .plane {
+  background: #2da44e;
+}
+
+.plane-marker--mid .plane {
+  background: #1f6feb;
+}
+
+.plane-marker--high .plane {
+  background: #8250df;
+}
+
+.plane-marker .plane svg {
+  width: 15px;
+  height: 15px;
+  fill: #ffffff;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 64px 24px;
+  text-align: center;
+  color: var(--ion-color-medium);
+}
+
+.empty-state ion-icon {
+  font-size: 2.5rem;
+}
+
+.empty-state p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+
+.empty-state span {
+  font-size: 0.85rem;
+}
+
+.airport-label {
+  background: rgba(255, 255, 255, 0.9);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #1f6feb;
+  padding: 1px 4px;
+}
+
+.airport-label::before {
+  display: none;
+}
+
+
+/* Mapa en modo oscuro */
+@media (prefers-color-scheme: dark) {
+  #map {
+    background: #1b1f24 !important;
+  }
+
+  .leaflet-tile-pane {
+    filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
+  }
+
+  .leaflet-bar a,
+  .leaflet-bar a:hover {
+    background: var(--ion-background-color-step-100, #2a2a2a);
+    color: var(--ion-text-color, #fff);
+    border-bottom-color: var(--ion-background-color-step-200, #444);
+  }
+
+  .leaflet-control-attribution {
+    background: rgba(0, 0, 0, 0.6) !important;
+    color: #bbb;
+  }
+
+  .leaflet-control-attribution a {
+    color: #8ab4f8;
+  }
+
+  .airport-label {
+    background: rgba(30, 30, 30, 0.9);
+    color: #8ab4f8;
+  }
+}
+
+.leaflet-top.leaflet-right {
+  top: var(--ion-safe-area-top, 0px);
+}

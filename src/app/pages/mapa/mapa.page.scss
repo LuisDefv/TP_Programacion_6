@@ -1,0 +1,122 @@
+.map-content {
+  --overflow: hidden;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #e8eef3;
+}
+
+.map-status {
+  position: absolute;
+  top: calc(12px + var(--ion-safe-area-top, 0px));
+  left: 12px;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(var(--ion-background-color-rgb, 255, 255, 255), 0.92);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
+  font-size: 0.8rem;
+  color: var(--ion-text-color, #333);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2dd36f;
+}
+
+.dot--cached {
+  background: #ffc409;
+}
+
+.dot--error {
+  background: #eb445a;
+}
+
+.map-empty {
+  position: absolute;
+  top: calc(52px + var(--ion-safe-area-top, 0px));
+  left: 12px;
+  z-index: 500;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: rgba(var(--ion-background-color-rgb, 255, 255, 255), 0.92);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.14);
+  font-size: 0.78rem;
+  color: var(--ion-color-medium, #555);
+}
+
+.map-legend {
+  position: absolute;
+  bottom: 24px;
+  left: 12px;
+  z-index: 500;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  max-width: calc(100% - 140px);
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(var(--ion-background-color-rgb, 255, 255, 255), 0.92);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.14);
+  font-size: 0.7rem;
+  color: var(--ion-text-color, #333);
+}
+
+.map-legend span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.swatch--ground {
+  background: #6e7781;
+}
+
+.swatch--low {
+  background: #2da44e;
+}
+
+.swatch--mid {
+  background: #1f6feb;
+}
+
+.swatch--high {
+  background: #8250df;
+}
+
+.map-error {
+  position: absolute;
+  top: calc(52px + var(--ion-safe-area-top, 0px));
+  left: 12px;
+  right: 12px;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(235, 68, 90, 0.95);
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+
+.status-spinner {
+  width: 14px;
+  height: 14px;
+}

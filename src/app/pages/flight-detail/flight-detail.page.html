@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ flight.callsign || flight.hex }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()" aria-label="Cerrar">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="flight-head">
+    <div>
+      <h1>{{ flight.callsign || 'Sin callsign' }}</h1>
+      <p>{{ subtitle }}</p>
+    </div>
+    <ion-button
+      fill="clear"
+      (click)="toggleFavorite()"
+      [attr.aria-label]="isFavorite ? 'Quitar de favoritos' : 'Guardar en favoritos'"
+    >
+      <ion-icon
+        slot="icon-only"
+        size="large"
+        [name]="isFavorite ? 'heart' : 'heart-outline'"
+        [color]="isFavorite ? 'danger' : 'medium'"
+      ></ion-icon>
+    </ion-button>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+
+  <ion-list lines="none" class="detail-list">
+    <ion-item>
+      <ion-label>
+        <p>Ruta</p>
+        <h2>{{ routeLabel }}</h2>
+        <ion-note *ngIf="routeCities">{{ routeCities }}</ion-note>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="airline">
+      <ion-label>
+        <p>Aerolínea</p>
+        <h2>{{ airline }}</h2>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="aircraftLabel">
+      <ion-label>
+        <p>Aeronave</p>
+        <h2>{{ aircraftLabel }}</h2>
+        <ion-note>{{ aircraftNote }}</ion-note>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid class="stats">
+    <ion-row>
+      <ion-col size="6">
+        <div class="stat">
+          <span>Altitud</span>
+          <strong>{{ formatAltitude(flight.altitudeFt) }}</strong>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="stat">
+          <span>Velocidad</span>
+          <strong>{{ formatSpeed(flight.speedKt) }}</strong>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="stat">
+          <span>Rumbo</span>
+          <strong>{{ formatTrack(flight.track) }}</strong>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="stat">
+          <span>Distancia</span>
+          <strong>{{ formatDistance(flight.distanceKm) }}</strong>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div class="stat">
+          <span>Régimen vertical</span>
+          <strong>{{ formatVerticalRate(flight.verticalRate) }}</strong>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <p class="source">Datos: adsb.fi y adsbdb</p>
+</ion-content>
