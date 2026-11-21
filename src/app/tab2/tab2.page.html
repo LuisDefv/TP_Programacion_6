@@ -1,17 +1,47 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Vuelos</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Callsign, matrícula o hex"
+      debounce="250"
+      (ionInput)="onSearch($event)"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-note class="offline-note" color="danger" *ngIf="(status$ | async)?.error">
+    {{ (status$ | async)?.error }} Reintentando…
+  </ion-note>
+
+  <ng-container *ngIf="filtered$ | async as flights">
+    <ion-list *ngIf="flights.length > 0" lines="full">
+      <ion-item button *ngFor="let flight of flights" (click)="open(flight)">
+        <ion-icon slot="start" name="airplane-outline" color="primary"></ion-icon>
+        <ion-label>
+          <h2>{{ flight.callsign || flight.hex }}</h2>
+          <p>
+            {{ flight.type || 'Tipo desconocido' }} ·
+            {{ flight.registration || 'sin matrícula' }}
+          </p>
+        </ion-label>
+        <div slot="end" class="flight-meta">
+          <strong>{{ formatDistance(flight.distanceKm) }}</strong>
+          <span>{{ formatAltitude(flight.altitudeFt) }}</span>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <div class="empty-state" *ngIf="flights.length === 0">
+      <ion-icon name="airplane-outline"></ion-icon>
+      <p>No hay vuelos para mostrar.</p>
+      <span>Probá actualizar o acercate a una zona con más tráfico.</span>
+    </div>
+  </ng-container>
 </ion-content>
