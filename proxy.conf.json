@@ -1,0 +1,20 @@
+{
+  "/adsbfi": {
+    "target": "https://opendata.adsb.fi",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/adsbfi": "" }
+  },
+  "/adsb": {
+    "target": "https://api.adsb.lol",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/adsb": "" }
+  },
+  "/adsbdb": {
+    "target": "https://api.adsbdb.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/adsbdb": "" }
+  }
+}
