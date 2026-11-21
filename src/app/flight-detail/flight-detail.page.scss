@@ -1,0 +1,68 @@
+.flight-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.flight-head h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.flight-head p {
+  margin: 2px 0 0;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.detail-list {
+  margin: 12px 0;
+  background: transparent;
+}
+
+.detail-list ion-item {
+  --background: var(--ion-color-step-50, #f6f6f8);
+  --border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.stats {
+  margin-top: 4px;
+}
+
+.stat {
+  background: var(--ion-color-step-50, #f6f6f8);
+  border-radius: 12px;
+  padding: 10px 12px;
+  height: 100%;
+}
+
+.stat span {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ion-color-medium);
+}
+
+.stat strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.05rem;
+}
+
+.source {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--ion-color-medium);
+}
