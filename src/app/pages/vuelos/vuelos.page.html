@@ -20,6 +20,16 @@
     {{ (status$ | async)?.error }} Reintentando…
   </ion-note>
 
+  <ion-list *ngIf="(status$ | async)?.loading && !(filtered$ | async)?.length" lines="full">
+    <ion-item *ngFor="let row of skeletonRows">
+      <ion-skeleton-text slot="start" [animated]="true" class="skeleton-icon"></ion-skeleton-text>
+      <ion-label>
+        <h2><ion-skeleton-text [animated]="true" style="width: 40%"></ion-skeleton-text></h2>
+        <p><ion-skeleton-text [animated]="true" style="width: 65%"></ion-skeleton-text></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
   <ng-container *ngIf="filtered$ | async as flights">
     <ion-list *ngIf="flights.length > 0" lines="full">
       <ion-item button *ngFor="let flight of flights" (click)="open(flight)">
@@ -38,7 +48,7 @@
       </ion-item>
     </ion-list>
 
-    <div class="empty-state" *ngIf="flights.length === 0">
+    <div class="empty-state" *ngIf="flights.length === 0 && !(status$ | async)?.loading">
       <ion-icon name="airplane-outline"></ion-icon>
       <p>No hay vuelos para mostrar.</p>
       <span>Probá actualizar o acercate a una zona con más tráfico.</span>

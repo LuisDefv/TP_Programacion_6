@@ -17,6 +17,7 @@ export class VuelosPage implements OnInit {
   readonly formatAltitude = formatAltitude;
   readonly status$ = this.flights.status$;
   readonly filtered$: Observable<Flight[]>;
+  readonly skeletonRows = [1, 2, 3, 4, 5, 6];
   private readonly term = new Subject<string>();
 
   constructor(
@@ -30,7 +31,7 @@ export class VuelosPage implements OnInit {
   }
 
   ngOnInit(): void {
-    void this.flights.restoreCache();
+    void this.flights.restoreCache().then(() => this.flights.refresh());
   }
 
   ionViewWillEnter(): void {

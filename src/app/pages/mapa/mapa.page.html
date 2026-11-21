@@ -8,7 +8,7 @@
       [class.dot--cached]="status.cached"
     ></span>
     <span>{{ (flights$ | async)?.length ?? 0 }} vuelos</span>
-    <span *ngIf="status.loading && !status.updatedAt">actualizando</span>
+    <ion-spinner *ngIf="status.loading" name="crescent" class="status-spinner"></ion-spinner>
     <span *ngIf="status.updatedAt">· {{ status.updatedAt | date: 'HH:mm:ss' }}</span>
     <span *ngIf="status.cached">· sin conexión</span>
   </div>

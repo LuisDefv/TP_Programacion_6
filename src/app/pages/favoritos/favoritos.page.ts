@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FavoritesService } from '../../services/favorites.service';
 import { FlightModalService } from '../../services/flight-modal.service';
@@ -10,13 +10,17 @@ import { Flight, SavedFlight } from '../../models/flight.model';
   styleUrls: ['favoritos.page.scss'],
   standalone: false,
 })
-export class FavoritosPage {
+export class FavoritosPage implements OnInit {
   readonly favorites$ = this.favorites.favorites$;
 
   constructor(
     private readonly favorites: FavoritesService,
     private readonly modal: FlightModalService,
   ) {}
+
+  ngOnInit(): void {
+    void this.favorites.load();
+  }
 
   open(saved: SavedFlight): void {
     void this.modal.open(this.toFlight(saved));

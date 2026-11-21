@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { Subscription } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { LocationService } from '../../services/location.service';
   styleUrls: ['mapa.page.scss'],
   standalone: false,
 })
-export class MapaPage implements AfterViewInit, OnDestroy {
+export class MapaPage implements OnInit, AfterViewInit, OnDestroy {
   readonly flights$ = this.flights.flights$;
   readonly status$ = this.flights.status$;
   refreshing = false;
@@ -37,6 +37,12 @@ export class MapaPage implements AfterViewInit, OnDestroy {
     private readonly modal: FlightModalService,
   ) {}
 
+  ngOnInit(): void {
+    // Muestra el ultimo listado guardado mientras llega la primera respuesta.
+    void this.flights.restoreCache();
+  }
+
+  // El mapa de Leaflet necesita que el <div id="map"> ya exista en el DOM.
   async ngAfterViewInit(): Promise<void> {
     const center = await this.location.current();
     this.flights.setCenter(center.lat, center.lon);
@@ -61,7 +67,6 @@ export class MapaPage implements AfterViewInit, OnDestroy {
     this.subscription = this.flights.flights$.subscribe(flights => this.render(flights));
     this.map.on('moveend', () => this.onMapMove());
 
-    await this.flights.restoreCache();
     await this.refresh();
     this.startTimer();
 
