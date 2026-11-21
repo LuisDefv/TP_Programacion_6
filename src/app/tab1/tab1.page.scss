@@ -21,10 +21,10 @@
   gap: 6px;
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(var(--ion-background-color-rgb, 255, 255, 255), 0.92);
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
   font-size: 0.8rem;
-  color: #333;
+  color: var(--ion-text-color, #333);
 }
 
 .dot {
@@ -49,10 +49,10 @@
   z-index: 500;
   padding: 6px 12px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(var(--ion-background-color-rgb, 255, 255, 255), 0.92);
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.14);
   font-size: 0.78rem;
-  color: #555;
+  color: var(--ion-color-medium, #555);
 }
 
 .map-error {
